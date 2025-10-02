@@ -136,7 +136,7 @@
         /* --- Slider Styling --- */
         .slider-container {
             width: 100%;
-            height: 400px;
+            height: 500px;
             overflow: hidden;
             position: relative;
         }
@@ -189,8 +189,8 @@
         }
 
         .category-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            display:grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 50fr));
             gap: 20px;
             max-width: 1200px;
             margin: 0 auto;
@@ -212,8 +212,8 @@
         
         /* here */
         .category-icon-box {
-            width: 125px;
-            height: 160px;
+            width: 350px;
+            height: 400px;
             background-color: var(--bg-light);
             /* Light gray background behind images */
             border-radius: 12px;
@@ -236,7 +236,7 @@
         }
 
         .category-item p {
-            margin: 0;
+            margin: 10;
             font-size: 14px;
             font-weight: 500;
         }
@@ -700,46 +700,29 @@
         /* --- Responsive Design for Mobile --- */
 
         @media (max-width: 768px) {
-
             .navbar {
-
                 flex-direction: column;
                 align-items: flex-start;
                 padding: 15px 20px;
-
             }
-
             .logo {
                 margin-bottom: 15px;
             }
-
             .search-container {
-
                 width: 100%;
                 margin: 0 0 15px 0;
-
             }
-
             .login-container-nav {
-
                 width: 100%;
-
             }
-
             .login-container-nav a {
-
                 display: block;
                 box-sizing: border-box;
                 text-align: center;
-
             }
-
-
-
             h1 {
                 font-size: 2rem;
             }
-
             h2 {
                 font-size: 1.75rem;
             }
@@ -747,52 +730,27 @@
             h3 {
                 font-size: 1.3rem;
             }
-
-
-
             .slider-container {
-
                 height: 250px;
-
             }
-
-
-
             .main-content {
-
                 padding: 30px 15px;
-
             }
-
             .review-section {
-
                 padding: 30px 15px;
-
             }
-
-
-
             .login-box {
-
                 padding: 25px;
-
             }
-
             .welcome-message {
-
                 font-size: 18px;
-
                 margin-bottom: 20px;
-
             }
-
             .tab-link {
-
                 padding: 8px 18px;
-
             }
-
-        }    </style>
+        }
+        </style>
 </head>
 
 <body>
@@ -934,7 +892,7 @@
     </div>
 
     <section class="category-grid-section">
-        <h2 class="category-grid-title">Browse Our Product Categories</h2>
+        <h2 class="category-grid-title">Compare from Categories</h2>
         <div class="category-grid">
             <a href="#" class="category-item">
                 <div class="category-icon-box">
@@ -946,12 +904,6 @@
                     <img src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=225/layout-engine/2022-11/Slice-5_4.png" alt="Snacks & Munchies">
                 </div>
                 
-            </a>
-            <a href="#" class="category-item">
-                <div class="category-icon-box" style="width: 110px; height: 180px;">
-                    <img src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=225/layout-engine/2022-11/Slice-19.png" alt="Personal Care">
-                </div>
-
             </a>
             
             <a href="#" class="category-item">
@@ -966,61 +918,6 @@
                 <p>Bakery & Biscuits</p>
             </a>
             
-
-            <a href="#" class="category-item">
-                <div class="category-icon-box">
-                    <img src="https://via.placeholder.com/80/ff8a5b/000000?text=Sauces" alt="Sauces & Spreads">
-                </div>
-                <p>Sauces & Spreads</p>
-            </a>
-            <a href="#" class="category-item">
-                <div class="category-icon-box">
-                    <img src="https://via.placeholder.com/80/ffc6a5/000000?text=Meat" alt="Chicken, Meat & Fish">
-                </div>
-                <p>Chicken, Meat & Fish</p>
-            </a>
-            <a href="#" class="category-item">
-                <div class="category-icon-box">
-                    <img src="https://via.placeholder.com/80/e9ff70/000000?text=Organic" alt="Organic & Healthy Living">
-                </div>
-                <p>Organic & Healthy Living</p>
-            </a>
-            <a href="#" class="category-item">
-                <div class="category-icon-box">
-                    <img src="https://via.placeholder.com/80/8c7ae6/FFFFFF?text=Baby" alt="Baby Care">
-                </div>
-                <p>Baby Care</p>
-            </a>
-            <a href="#" class="category-item">
-                <div class="category-icon-box">
-                    <img src="https://via.placeholder.com/80/e85d04/FFFFFF?text=Pharma" alt="Pharma & Wellness">
-                </div>
-                <p>Pharma & Wellness</p>
-            </a>
-            <a href="#" class="category-item">
-                <div class="category-icon-box">
-                    <img src="https://via.placeholder.com/80/00b4d8/FFFFFF?text=Cleaning" alt="Cleaning Essentials">
-                </div>
-                <p>Cleaning Essentials</p>
-            </a>
-            <a href="#" class="category-item">
-                <div class="category-icon-box">
-                    <img src="https://via.placeholder.com/80/90e0ef/000000?text=Home" alt="Home & Office">
-                </div>
-                <p>Home & Office</p>
-            </a>
-            <a href="#" class="category-item">
-                <div class="category-icon-box">
-                    <img src="https://via.placeholder.com/80/55a630/FFFFFF?text=Personal" alt="Personal Care">
-                </div>
-                <p>Personal Care</p>
-            </a>
-            <a href="#" class="category-item">
-                <div class="category-icon-box">
-                    <img src="https://via.placeholder.com/80/ff6d00/FFFFFF?text=Pet" alt="Pet Care">
-                </div>
-                <p>Pet Care</p>
-            </a>
         </div>
     </section>
     <main class="main-content">
