@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthScan - Product Health Scanner</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .scanner-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .scan-button {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+            margin-bottom: 20px;
+        }
+
+        .scan-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        .scan-button:active {
+            transform: translateY(0);
+        }
+
+        .manual-input {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .manual-input input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        .manual-input input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .lookup-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lookup-button:hover {
+            background: #5a6fd8;
+            transform: translateY(-1px);
+        }
+
+        .result-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .product-info {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .product-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .product-brand {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .health-score {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            position: relative;
+        }
+
+        .score-a { background: linear-gradient(135deg, #4CAF50, #45a049); }
+        .score-b { background: linear-gradient(135deg, #8BC34A, #7CB342); }
+        .score-c { background: linear-gradient(135deg, #FFC107, #FF8F00); }
+        .score-d { background: linear-gradient(135deg, #FF9800, #F57C00); }
+        .score-e { background: linear-gradient(135deg, #F44336, #D32F2F); }
+
+        .score-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .nutrition-facts {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .nutrition-facts h3 {
+            margin: 0 0 15px 0;
+            color: #333;
+            font-size: 1.2rem;
+        }
+
+        .nutrition-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding: 5px 0;
+        }
+
+        .nutrition-item:not(:last-child) {
+            border-bottom: 1px solid #eee;
+        }
+
+        .warnings {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .warnings h4 {
+            margin: 0 0 10px 0;
+            color: #856404;
+            font-size: 1rem;
+        }
+
+        .warning-item {
+            color: #856404;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .scan-again {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .scan-again:hover {
+            background: #5a6fd8;
+        }
+
+        .scanning {
+            text-align: center;
+            padding: 40px 20px;
+            display: none;
+        }
+
+        .scanner-animation {
+            width: 60px;
+            height: 60px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .scanner-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 HealthScan</h1>
+            <p>Scan products for instant health scores</p>
+        </div>
+
+        <div class="scanner-section" id="scannerSection">
+            <button class="scan-button" onclick="startScan()">
+                📱 Scan Barcode
+            </button>
+            <p style="color: #666; margin: 0;">Point your camera at the product barcode</p>
+            
+            <div class="manual-input">
+                <p style="color: #666; margin-bottom: 15px;">Or enter barcode manually:</p>
+                <input type="text" id="barcodeInput" placeholder="Enter barcode number" maxlength="13">
+                <button class="lookup-button" onclick="lookupProduct()">Look Up Product</button>
+            </div>
+        </div>
+
+        <div class="scanning" id="scanningSection">
+            <div class="scanner-animation"></div>
+            <p style="color: white; font-size: 1.1rem;">Scanning product...</p>
+        </div>
+
+        <div class="result-card" id="resultCard">
+            <div class="product-info">
+                <div class="product-name" id="productName"></div>
+                <div class="product-brand" id="productBrand"></div>
+            </div>
+
+            <div class="health-score">
+                <div class="score-circle" id="scoreCircle"></div>
+                <div class="score-label" id="scoreLabel"></div>
+            </div>
+
+            <div class="nutrition-facts">
+                <h3>Nutrition Facts (per 100g)</h3>
+                <div id="nutritionList"></div>
+            </div>
+
+            <div class="warnings" id="warningsSection" style="display: none;">
+                <h4>⚠️ Health Considerations</h4>
+                <div id="warningsList"></div>
+            </div>
+
+            <button class="scan-again" onclick="resetScanner()">Scan Another Product</button>
+        </div>
+    </div>
+
+    <script>
+        // Sample product database
+        const productDatabase = {
+            '1234567890123': {
+                name: 'Organic Whole Grain Cereal',
+                brand: 'Nature\'s Best',
+                score: 'A',
+                nutrition: {
+                    'Calories': '350 kcal',
+                    'Total Fat': '3.2g',
+                    'Saturated Fat': '0.8g',
+                    'Sodium': '180mg',
+                    'Total Carbs': '72g',
+                    'Dietary Fiber': '12g',
+                    'Sugars': '8g',
+                    'Protein': '11g'
+                },
+                warnings: []
+            },
+            '9876543210987': {
+                name: 'Chocolate Chip Cookies',
+                brand: 'Sweet Treats Co.',
+                score: 'D',
+                nutrition: {
+                    'Calories': '485 kcal',
+                    'Total Fat': '22g',
+                    'Saturated Fat': '12g',
+                    'Sodium': '420mg',
+                    'Total Carbs': '68g',
+                    'Dietary Fiber': '2.1g',
+                    'Sugars': '35g',
+                    'Protein': '6g'
+                },
+                warnings: ['High in saturated fat', 'High sugar content', 'Contains artificial preservatives']
+            },
+            '5555666677778': {
+                name: 'Greek Yogurt Plain',
+                brand: 'Healthy Dairy',
+                score: 'A',
+                nutrition: {
+                    'Calories': '130 kcal',
+                    'Total Fat': '4g',
+                    'Saturated Fat': '2.5g',
+                    'Sodium': '65mg',
+                    'Total Carbs': '9g',
+                    'Dietary Fiber': '0g',
+                    'Sugars': '9g',
+                    'Protein': '15g'
+                },
+                warnings: []
+            },
+            '1111222233334': {
+                name: 'Energy Drink Original',
+                brand: 'PowerBoost',
+                score: 'E',
+                nutrition: {
+                    'Calories': '110 kcal',
+                    'Total Fat': '0g',
+                    'Saturated Fat': '0g',
+                    'Sodium': '200mg',
+                    'Total Carbs': '28g',
+                    'Dietary Fiber': '0g',
+                    'Sugars': '27g',
+                    'Protein': '0g'
+                },
+                warnings: ['Very high caffeine content', 'Excessive sugar', 'Contains artificial colors', 'Not recommended for children']
+            }
+        };
+
+        function startScan() {
+            document.getElementById('scannerSection').style.display = 'none';
+            document.getElementById('scanningSection').style.display = 'block';
+            
+            // Simulate scanning process
+            setTimeout(() => {
+                // Generate random barcode from our database
+                const barcodes = Object.keys(productDatabase);
+                const randomBarcode = barcodes[Math.floor(Math.random() * barcodes.length)];
+                showProduct(randomBarcode);
+            }, 2000);
+        }
+
+        function lookupProduct() {
+            const barcode = document.getElementById('barcodeInput').value.trim();
+            
+            if (!barcode) {
+                alert('Please enter a barcode number');
+                return;
+            }
+
+            document.getElementById('scannerSection').style.display = 'none';
+            document.getElementById('scanningSection').style.display = 'block';
+            
+            setTimeout(() => {
+                showProduct(barcode);
+            }, 1000);
+        }
+
+        function showProduct(barcode) {
+            document.getElementById('scanningSection').style.display = 'none';
+            
+            let product = productDatabase[barcode];
+            
+            // If product not found, generate a sample product
+            if (!product) {
+                product = generateSampleProduct();
+            }
+            
+            // Update product info
+            document.getElementById('productName').textContent = product.name;
+            document.getElementById('productBrand').textContent = product.brand;
+            
+            // Update health score
+            const scoreCircle = document.getElementById('scoreCircle');
+            const scoreLabel = document.getElementById('scoreLabel');
+            
+            scoreCircle.textContent = product.score;
+            scoreCircle.className = `score-circle score-${product.score.toLowerCase()}`;
+            
+            const scoreDescriptions = {
+                'A': 'Excellent Choice',
+                'B': 'Good Choice',
+                'C': 'Fair Choice',
+                'D': 'Poor Choice',
+                'E': 'Avoid if Possible'
+            };
+            
+            scoreLabel.textContent = scoreDescriptions[product.score];
+            
+            // Update nutrition facts
+            const nutritionList = document.getElementById('nutritionList');
+            nutritionList.innerHTML = '';
+            
+            for (const [nutrient, value] of Object.entries(product.nutrition)) {
+                const item = document.createElement('div');
+                item.className = 'nutrition-item';
+                item.innerHTML = `<span>${nutrient}</span><span><strong>${value}</strong></span>`;
+                nutritionList.appendChild(item);
+            }
+            
+            // Update warnings
+            const warningsSection = document.getElementById('warningsSection');
+            const warningsList = document.getElementById('warningsList');
+            
+            if (product.warnings && product.warnings.length > 0) {
+                warningsSection.style.display = 'block';
+                warningsList.innerHTML = '';
+                
+                product.warnings.forEach(warning => {
+                    const item = document.createElement('div');
+                    item.className = 'warning-item';
+                    item.textContent = `• ${warning}`;
+                    warningsList.appendChild(item);
+                });
+            } else {
+                warningsSection.style.display = 'none';
+            }
+            
+            document.getElementById('resultCard').style.display = 'block';
+        }
+
+        function generateSampleProduct() {
+            const sampleProducts = [
+                {
+                    name: 'Mixed Berry Smoothie',
+                    brand: 'Fresh Blend',
+                    score: 'B',
+                    nutrition: {
+                        'Calories': '95 kcal',
+                        'Total Fat': '0.5g',
+                        'Saturated Fat': '0.1g',
+                        'Sodium': '15mg',
+                        'Total Carbs': '23g',
+                        'Dietary Fiber': '4g',
+                        'Sugars': '18g',
+                        'Protein': '1.5g'
+                    },
+                    warnings: ['Contains natural fruit sugars']
+                },
+                {
+                    name: 'Instant Ramen Noodles',
+                    brand: 'Quick Meal',
+                    score: 'D',
+                    nutrition: {
+                        'Calories': '380 kcal',
+                        'Total Fat': '14g',
+                        'Saturated Fat': '7g',
+                        'Sodium': '1820mg',
+                        'Total Carbs': '56g',
+                        'Dietary Fiber': '2g',
+                        'Sugars': '3g',
+                        'Protein': '8g'
+                    },
+                    warnings: ['Very high sodium content', 'Contains MSG', 'High in saturated fat']
+                }
+            ];
+            
+            return sampleProducts[Math.floor(Math.random() * sampleProducts.length)];
+        }
+
+        function resetScanner() {
+            document.getElementById('resultCard').style.display = 'none';
+            document.getElementById('scannerSection').style.display = 'block';
+            document.getElementById('barcodeInput').value = '';
+        }
+
+        // Allow Enter key to trigger lookup
+        document.getElementById('barcodeInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                lookupProduct();
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'987d10f654625475',t:'MTc1OTMzMzMwOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
