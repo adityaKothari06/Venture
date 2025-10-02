@@ -30,18 +30,22 @@
             padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-light);
-            color: var(--text-dark);
+            /* color: var(--text-dark); */
             font-size: 16px;
         }
+
         h1 {
             font-size: 2.5rem;
         }
+
         h2 {
             font-size: 2rem;
         }
+
         h3 {
             font-size: 1.5rem;
         }
+
         /* --- Navigation Bar Styling --- */
         .navbar {
             display: flex;
@@ -65,8 +69,8 @@
             align-items: center;
             flex-grow: 1;
             justify-content: center;
-            max-width: 600px;
-            margin: 0 20px;
+            max-width: 580px;
+            margin: 0 200px;
         }
 
         .search-bar {
@@ -117,7 +121,7 @@
         }
 
         /* Login Button Styling */
-        .login-container a {
+        .login-container-nav {
             text-decoration: none;
             background-color: #000000;
             color: #ffffff;
@@ -128,6 +132,11 @@
             transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         }
 
+        .login-container-nav a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
         .login-container a:hover {
             background-color: rgba(134, 131, 131, 0.9);
             transform: translateY(-1px);
@@ -136,7 +145,7 @@
         /* --- Slider Styling --- */
         .slider-container {
             width: 100%;
-            height: 500px;
+            height: 580px;
             overflow: hidden;
             position: relative;
         }
@@ -175,25 +184,27 @@
 
         /* --- NEW Category Grid Styling --- */
         .category-grid-section {
-            padding: 40px 20px;
+            padding: 50px 10px;
             background-color: #ffffff;
             /* White background to make the categories pop */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
         .category-grid-title {
-            text-align: center;
-            margin-bottom: 30px;
-            color: var(--primary-color);
+            text-align: left;
+            padding-left: 76px;
+            margin-bottom: 20px;
+            background-color: var(--bg-light);
+            color: black;
             font-size: 28px;
         }
 
         .category-grid {
-            display:grid;
+            display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 50fr));
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
+            gap: 60px;
+            max-width: 1280px;
+            margin-left: 20px;
         }
 
         .category-item {
@@ -209,7 +220,7 @@
             border-radius: 8px;
         }
 
-        
+
         /* here */
         .category-icon-box {
             width: 350px;
@@ -313,7 +324,7 @@
 
 
         /* --- Responsive Design for Mobile --- */
-        
+
 
         /* Scanner Overlay Styles (kept for completeness) */
         #scanner-overlay {
@@ -414,7 +425,7 @@
             display: flex;
         }
 
-.login-container {
+        .login-container {
 
             font-family: 'Poppins', sans-serif;
             background-color: #ffffff;
@@ -705,24 +716,30 @@
                 align-items: flex-start;
                 padding: 15px 20px;
             }
+
             .logo {
                 margin-bottom: 15px;
             }
+
             .search-container {
                 width: 100%;
                 margin: 0 0 15px 0;
             }
+
             .login-container-nav {
                 width: 100%;
             }
+
             .login-container-nav a {
                 display: block;
                 box-sizing: border-box;
                 text-align: center;
             }
+
             h1 {
                 font-size: 2rem;
             }
+
             h2 {
                 font-size: 1.75rem;
             }
@@ -730,27 +747,33 @@
             h3 {
                 font-size: 1.3rem;
             }
+
             .slider-container {
                 height: 250px;
             }
+
             .main-content {
                 padding: 30px 15px;
             }
+
             .review-section {
                 padding: 30px 15px;
             }
+
             .login-box {
                 padding: 25px;
             }
+
             .welcome-message {
                 font-size: 18px;
                 margin-bottom: 20px;
             }
+
             .tab-link {
                 padding: 8px 18px;
             }
         }
-        </style>
+    </style>
 </head>
 
 <body>
@@ -773,7 +796,7 @@
         </div>
         <a></a>
 
-         <div class="login-container-nav">
+        <div class="login-container-nav">
             <a href="javascript:void(0);" onclick="toggleLoginPopup()">Log In</a>
         </div>
 
@@ -792,7 +815,7 @@
         </div> -->
     </nav>
 
-    
+
     <div id="login-popup">
 
         <div class="login-container">
@@ -803,7 +826,7 @@
 
                 <h1 class="company-name">CIPHER</h1>
 
-                <h2 class="welcome-message">Welcome to Cipher</h2>
+                <h2 class="welcome-message"></h2>
 
                 <div class="tabs">
 
@@ -874,8 +897,7 @@
 
         <div class="slider">
 
-            <img src="compare.png"
-                alt="Health Tech Slide 1">
+            <img src="compare.png" alt="Health Tech Slide 1">
 
 
 
@@ -892,28 +914,32 @@
         <div class="category-grid">
             <a href="#" class="category-item">
                 <div class="category-icon-box">
-                    <img src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-4_9.png" alt="cold drinks">
+                    <img src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/layout-engine/2022-11/Slice-4_9.png"
+                        alt="cold drinks">
                 </div>
             </a>
             <a href="#" class="category-item">
                 <div class="category-icon-box">
-                    <img src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=225/layout-engine/2022-11/Slice-5_4.png" alt="Snacks & Munchies">
+                    <img src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=225/layout-engine/2022-11/Slice-5_4.png"
+                        alt="Snacks & Munchies">
                 </div>
-                
+
             </a>
-            
+
             <a href="#" class="category-item">
                 <div class="category-icon-box">
-                    <img src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=225/layout-engine/2022-11/Slice-15.png" alt="Baby Care">
+                    <img src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=225/layout-engine/2022-11/Slice-15.png"
+                        alt="Baby Care">
                 </div>
             </a>
             <a href="#" class="category-item">
                 <div class="category-icon-box">
-                    <img src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=225/layout-engine/2022-11/Slice-6_5.png" alt="Bakery & Biscuits">
+                    <img src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=225/layout-engine/2022-11/Slice-6_5.png"
+                        alt="Bakery & Biscuits">
                 </div>
                 <p>Bakery & Biscuits</p>
             </a>
-            
+
         </div>
     </section>
     <main class="main-content">
@@ -990,7 +1016,7 @@
         }
 
         // Close the login popup when clicking outside the popup content
-       window.addEventListener('click', (event) => {
+        window.addEventListener('click', (event) => {
             if (event.target === document.getElementById('login-popup')) {
                 toggleLoginPopup();
             }
